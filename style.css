@@ -1,0 +1,371 @@
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+  color: #111;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  overflow-x: hidden;
+}
+
+.bg{
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(800px 500px at 20% 20%, rgba(255, 200, 200, .7), transparent 60%),
+    radial-gradient(800px 500px at 80% 30%, rgba(190, 220, 255, .7), transparent 60%),
+    radial-gradient(900px 600px at 60% 80%, rgba(210, 255, 210, .6), transparent 65%),
+    linear-gradient(#fff, #fafafa);
+  filter: saturate(1.1);
+  z-index: -1;
+}
+
+.card{
+  width: min(860px, calc(100% - 24px));
+  background: rgba(255,255,255,.75);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: 20px;
+  padding: 22px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.08);
+}
+
+.header{
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.avatar{
+  width: 72px;
+  height: 72px;
+  border-radius: 18px;
+  border: 1px solid rgba(0,0,0,.1);
+  box-shadow: 0 8px 24px rgba(0,0,0,.15);
+  background: white;
+}
+
+h1{ margin: 0; font-size: 28px; letter-spacing: .5px; }
+.subtitle{ margin: 6px 0 0; color: rgba(0,0,0,.6); }
+
+.chips{
+  margin-top: 16px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.chip{
+  border: 1px solid rgba(0,0,0,.1);
+  background: rgba(255,255,255,.9);
+  padding: 10px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform .1s ease;
+}
+.chip:active{ transform: scale(.98); }
+
+.toast{
+  min-height: 22px;
+  margin: 12px 0 6px;
+  color: rgba(0,0,0,.75);
+}
+
+.links{
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.btn{
+  text-decoration: none;
+  color: #111;
+  border: 1px solid rgba(0,0,0,.12);
+  background: rgba(255,255,255,.9);
+  padding: 10px 14px;
+  border-radius: 14px;
+}
+
+.projects{ margin-top: 18px; }
+.projects h2{ margin: 0 0 10px; font-size: 18px; }
+.grid{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+@media (max-width: 680px){
+  .grid{ grid-template-columns: 1fr; }
+}
+
+.project{
+  border: 1px solid rgba(0,0,0,.08);
+  background: rgba(255,255,255,.85);
+  border-radius: 16px;
+  padding: 14px;
+}
+.project h3{ margin: 0 0 6px; }
+.project p{ margin: 0 0 10px; color: rgba(0,0,0,.65); }
+.mini{ color: #111; }
+
+.footer{
+  margin-top: 14px;
+  color: rgba(0,0,0,.5);
+  font-size: 12px;
+}
+/* ===== 圆角图标卡片 ===== */
+.icon-links {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 14px;
+}
+
+.icon-card {
+  text-decoration: none;
+  color: #111;
+  background: rgba(255,255,255,0.9);
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 20px;
+  padding: 18px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.icon-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 14px 32px rgba(0,0,0,0.16);
+}
+
+.icon {
+  font-size: 28px;
+}
+
+.label {
+  font-size: 14px;
+  opacity: 0.75;
+}
+
+/* 小说封面缩略图（限制大小版） */
+.novel-cover{
+  width: 140px;           /* 关键：固定缩略图宽度 */
+  aspect-ratio: 3 / 4;    /* 书封面比例 */
+  object-fit: cover;
+  border-radius: 10px;
+  margin: 10px 0 12px;
+  border: 1px solid rgba(0,0,0,.08);
+}
+
+/* 封面悬停动画：微缩放 + 微旋转 + 阴影变化 */
+.novel-cover{
+  transition: transform 220ms ease, box-shadow 220ms ease, filter 220ms ease;
+  transform-origin: center;
+  will-change: transform;
+}
+
+
+/* 小说卡片：封面在左，文字在右（不竖排） */
+.novel-project{
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  flex-direction: row-reverse; /* 关键：左右对调 */
+}
+
+.novel-project .novel-cover{
+  width: 120px;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 12px;
+  flex-shrink: 0;
+  border: 1px solid rgba(0,0,0,.08);
+}
+
+/* 文字区域：竖向排版 + 防止被挤到一字一行 */
+.novel-body{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+.novel-body h3{
+  margin: 0;
+}
+.novel-body p{
+  margin: 0;
+}
+
+/* ================================
+   小说封面 · 酷一点的 3D 动效
+   ================================ */
+
+/* 给小说卡片一个 3D 视角 */
+.novel-project{
+  perspective: 900px;
+}
+
+/* 封面基础状态 */
+.novel-cover{
+  position: relative;
+  transition:
+    transform 260ms cubic-bezier(.2,.8,.2,1),
+    filter 260ms ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* 只有鼠标真正放在封面上，才触发 */
+.novel-cover:hover{
+  transform:
+    rotateY(-10deg)
+    rotateX(4deg)
+    scale(1.03);
+  filter: saturate(1.06) contrast(1.04);
+}
+
+/* 光泽层 */
+.novel-cover::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    120deg,
+    transparent 20%,
+    rgba(255,255,255,.35) 40%,
+    rgba(255,255,255,.15) 50%,
+    transparent 60%
+  );
+  opacity: 0;
+  transform: translateX(-120%);
+  transition: transform 420ms ease, opacity 420ms ease;
+  pointer-events: none;
+}
+
+/* 光泽只在封面 hover 时扫过 */
+.novel-cover:hover::after{
+  opacity: 1;
+  transform: translateX(120%);
+}
+
+/* ===== 体重追踪板块 ===== */
+.weight-card{
+  border: 1px solid rgba(0,0,0,.08);
+  background: rgba(255,255,255,.85);
+  border-radius: 16px;
+  padding: 14px;
+}
+
+.weight-top{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.weight-title{
+  font-weight: 700;
+}
+
+.weight-hint{
+  margin-top: 4px;
+  font-size: 12px;
+  color: rgba(0,0,0,.55);
+}
+
+.weight-upload{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(0,0,0,.12);
+  background: rgba(255,255,255,.9);
+  padding: 10px 12px;
+  border-radius: 14px;
+  cursor: pointer;
+}
+
+.weight-upload input{
+  display: none;
+}
+
+.weight-stats{
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+@media (max-width: 680px){
+  .weight-stats{ grid-template-columns: 1fr; }
+}
+
+.stat{
+  border: 1px solid rgba(0,0,0,.08);
+  background: rgba(255,255,255,.75);
+  border-radius: 14px;
+  padding: 10px 12px;
+}
+
+.stat-k{
+  font-size: 12px;
+  color: rgba(0,0,0,.55);
+}
+
+.stat-v{
+  margin-top: 6px;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.weight-chart-wrap{
+  margin-top: 12px;
+  border: 1px solid rgba(0,0,0,.08);
+  background: rgba(255,255,255,.75);
+  border-radius: 14px;
+  padding: 10px;
+}
+
+.weight-note{
+  margin-top: 10px;
+  font-size: 12px;
+  color: rgba(0,0,0,.55);
+}
+
+/* ===== 小说卡片：阅读按钮美化（覆盖 .mini 默认链接样式） ===== */
+.novel-project .mini{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  margin-top: 12px;          /* 和简介拉开距离 */
+  width: fit-content;
+
+  padding: 8px 12px;
+  border-radius: 999px;
+
+  text-decoration: none;     /* 去掉下划线 */
+  border: 1px solid rgba(0,0,0,.12);
+  background: rgba(255,255,255,.9);
+  color: rgba(0,0,0,.85);
+  font-weight: 650;
+  font-size: 13px;
+  line-height: 1;
+
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+
+.novel-project .mini:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(0,0,0,.10);
+}
+
+/* 可选：如果你希望按钮永远在文字区底部（更规整） */
+.novel-body{
+  min-height: 120px;         /* 让两本书卡片对齐更稳定，可按需要删 */
+}

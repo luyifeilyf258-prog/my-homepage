@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>我的个人主页</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bg"></div>
+  <h2>我的作品</h2>
+  <main class="card">
+    <div class="header">
+      <img class="avatar" src="avatar.jpg" alt="avatar" />
+      <div>
+       <h1 id="name">Louis·Fat</h1>
+<p class="subtitle" id="tagline">
+  ✍️ 写小说 · 🍜 吃面 · 🌍 顺便拯救世界
+</p>
+      </div>
+    </div>
+
+    <section class="chips">
+      <button class="chip" data-msg="你好！我是Louis，但我在认真学网页！">👋 打个招呼</button>
+      <button class="chip" data-msg="我会继续更新作品，欢迎关注！">🚀 看看宣言</button>
+      <button class="chip" id="confettiBtn">🎉 放个庆祝</button>
+    </section>
+
+    <p class="toast" id="toast" aria-live="polite"></p>
+
+<section class="icon-links">
+  <a class="icon-card" href="https://github.com/你的GitHub用户名" target="_blank">
+    <div class="icon">🐙</div>
+    <div class="label">GitHub</div>
+  </a>
+
+  <a class="icon-card" href="https://space.bilibili.com/你的B站ID" target="_blank">
+    <div class="icon">📺</div>
+    <div class="label">Bilibili</div>
+  </a>
+
+  <a class="icon-card" href="https://x.com/你的X账号" target="_blank">
+    <div class="icon">𝕏</div>
+    <div class="label">X</div>
+  </a>
+
+  <a class="icon-card" href="mailto:你的邮箱@example.com">
+    <div class="icon">✉️</div>
+    <div class="label">Email</div>
+  </a>
+</section>
+
+    <section class="projects">
+      <h2>我的作品</h2>
+      <div class="grid">
+       <article class="project novel-project">
+  <img class="novel-cover" src="./works/cover.jpg" alt="我的小说封面" />
+  <div class="novel-body">
+    <h3>📖 《焚风》</h3>
+    <p>
+     尽管这世界终将会变成一块白银，我们的每一次跳跃，每一声呼喊也都将引来一阵蝶舞。
+    </p>
+    <a class="mini" href="./works/my-novel.pdf" target="_blank" rel="noreferrer">
+      阅读小说 
+    </a>
+  </div>
+</article>
+
+<article class="project novel-project">
+  <img class="novel-cover" src="./works/Selected Works of Lu Fei.jpg" alt="我的小说封面" />
+  <div class="novel-body">
+    <h3>📖 《鲁肥文选》</h3>
+    <p>
+      Louis的第一本书，中学时期的他遇到了很多有趣的灵魂，故将此记录。
+    </p>
+    <a class="mini" href="./works/Selected Works of Lu Fei.pdf" target="_blank" rel="noreferrer">
+      阅读小说 
+    </a>
+  </div>
+</article>
+
+      </div>
+    </section>
+
+<section class="projects">
+  <h2>体重追踪</h2>
+
+  <div class="weight-card">
+    <div class="weight-top">
+      <div>
+        <div class="weight-title">📈 体重变化</div>
+        <div class="weight-hint">上传 .xlsx 后自动绘制：原始体重 vs 卡尔曼滤波“真实体重”</div>
+      </div>
+
+      <label class="weight-upload">
+        选择 Excel
+        <input id="weightFile" type="file" accept=".xlsx,.xls,.csv" />
+      </label>
+    </div>
+
+    <div class="weight-stats">
+      <div class="stat">
+        <div class="stat-k">最新测量体重</div>
+        <div class="stat-v" id="rawLatest">—</div>
+      </div>
+      <div class="stat">
+        <div class="stat-k">卡尔曼估计真实体重</div>
+        <div class="stat-v" id="kfLatest">—</div>
+      </div>
+      <div class="stat">
+        <div class="stat-k">数据点数</div>
+        <div class="stat-v" id="nPoints">—</div>
+      </div>
+    </div>
+
+    <div class="weight-chart-wrap">
+      <canvas id="weightChart" height="120"></canvas>
+    </div>
+
+    <div class="weight-note" id="weightNote">
+      Excel 建议列名：Date、Weight（例如 2025-12-31 / 70.2）
+    </div>
+  </div>
+</section>
+
+    <footer class="footer">
+      <span id="year"></span> · Made with❤️
+    </footer>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
